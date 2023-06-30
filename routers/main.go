@@ -26,4 +26,9 @@ func InitRouter(r *gin.Engine) {
 			"*",
 		},
 	}))
+
+	//TodoRouterのすべてのパスを"/todo"で始まるようにグループ化
+	todo_router := r.Group("/todo")
+	//InitTodoRouterを実行
+	InitTodoRouters(todo_router)
 }
