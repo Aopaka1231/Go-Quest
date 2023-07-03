@@ -3,6 +3,7 @@ package main
 
 import (
 	"go-quest/db"
+	"go-quest/routers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +14,8 @@ func main() {
 	r := gin.Default()
 
 	db.InitDB()
+
+	routers.InitRouter(r)
 
 	//GETメソッドを定義
 	//"/"にアクセスしたときに{"message": "Hello world!!}を返す
