@@ -18,11 +18,12 @@ func GetAllTodos() (res_todos []db.Todo, err error) {
 }
 
 // Todoを更新する関数
-func UpdateTodo(id uint, content string, Todo db.Todo) (err error) {
-	if err = db.Sspl.Where("id = ?", id).Error; err != nil {
-		return err
+func UpdateTodo(id uint, content string) (t db.Todo, err error) {
+	if err = db.Sspl.Where("id = ?", id).First(&t).Error; err != nil {
+		return t, err
 	}
-	db.Sspl.Model(&Todo).Where("id = ?", id).Update(content, "Content")
+	t.Content = content
+	db.Sspl.Save(&t)
 	return
 }
 
